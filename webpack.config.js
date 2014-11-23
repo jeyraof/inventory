@@ -13,7 +13,7 @@ module.exports = {
   module: {
     loaders: [
       { test: /\.css$/, loader: "style!css" },
-      { test: /\.less$/, loader: "style!css!less" }
+      { test: /\.less$/, loader: "style!css!autoprefixer!less" }
     ]
   },
   plugins: [
