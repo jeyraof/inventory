@@ -64,3 +64,9 @@ def facebook_oauth_authorized(resp):
         flask.flash(u'회원 가입을 축하합니다!')
 
     return flask.redirect(next_url)
+
+
+@bp.route('/logout')
+def logout():
+    logout_user()
+    return flask.redirect(flask.url_for('main.index'))
