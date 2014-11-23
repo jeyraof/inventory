@@ -6,3 +6,4 @@ local.db
 node_modules
 inventory/static/build/*.css
 inventory/static/build/*.js
+.DS_Store
