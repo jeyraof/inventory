@@ -4,3 +4,5 @@
 settings.py
 local.db
 node_modules
+*/static/build/*.css
+*/static/build/*.js
