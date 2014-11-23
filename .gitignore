@@ -3,3 +3,4 @@
 *.pyc
 settings.py
 local.db
+node_modules
