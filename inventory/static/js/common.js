@@ -27,7 +27,9 @@ var App = React.createClass({
       <div className="app">
         <div className="header">
           <ul>
-            <li>1</li>
+            <li>
+              <Link to="newsfeed">Inventory</Link>
+            </li>
             <li>2</li>
             <li>3</li>
           </ul>
