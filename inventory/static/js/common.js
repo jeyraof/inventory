@@ -18,9 +18,7 @@ require('../less/common.less');
 
 var App = React.createClass({
   getInitialState: function() {
-    return {
-      'loggedIn': Auth.loggedIn()
-    };
+    return Auth.loggedIn();
   },
   render: function() {
     var LoginStatus = this.state.loggedIn ? Auth.LogOut : Auth.LogIn;
@@ -60,6 +58,8 @@ var routes = (
   <Route name="app" path="/" handler={App}>
     <DefaultRoute name="newsfeed" handler={require('./NewsFeed')}/>
     <NotFoundRoute handler={RedirectToMainWhenNotFound}/>
+
+    <Route name="userDetail" path="user/:userId" handler={require('./UserDetail')}/>
   </Route>
 );
 

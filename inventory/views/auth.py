@@ -75,5 +75,5 @@ def logout():
 @bp.route('/logged_in')
 def logged_in():
     if flask.g.user:
-        return flask.jsonify(ok=1, token=flask.g.user.token)
-    return flask.jsonify(ok=0, token='')
+        return flask.jsonify(ok=1, token=flask.g.user.token, user_id=flask.g.user.id)
+    return flask.jsonify(ok=0, token='', user_id='')
