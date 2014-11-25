@@ -70,3 +70,10 @@ def facebook_oauth_authorized(resp):
 def logout():
     logout_user()
     return flask.redirect(flask.url_for('main.index'))
+
+
+@bp.route('/logged_in')
+def logged_in():
+    if flask.g.user:
+        return flask.jsonify(ok=1, token=flask.g.user.token)
+    return flask.jsonify(ok=0, token='')
