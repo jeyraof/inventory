@@ -3,6 +3,7 @@ __author__ = 'Jaeyoung'
 
 
 import datetime
+import hashlib
 from . import db
 
 
@@ -45,13 +46,17 @@ class User(db.Model):
 
         return new_user, 1
 
+    @property
+    def token(self):
+        return hashlib.md5('%s-%s' % (self.id, self.fb_id)).hexdigest()
+
 
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=1)
     name = db.Column(db.String(100), nullable=0, unique=1)
     parent_id = db.Column(db.Integer, db.ForeignKey('category.id'), nullable=1)
 
-    parent = db.relationship('Category', backref=db.backref('sub_categories'), lazy='dynamic')
+    parent = db.relationship('Category', backref=db.backref('sub_categories'), remote_side=[id])
 
     def __init__(self, **kwargs):
         super(Category, self).__init__(**kwargs)
@@ -72,7 +77,7 @@ class Item(db.Model):
     name = db.Column(db.String(100), nullable=0)
     description = db.Column(db.Text, nullable=1)
 
-    brand = db.relationship('Brand', backref=db.backref('items'), lazy='dynamic', cascade='all, delete-orphan')
+    brand = db.relationship('Brand', backref=db.backref('items'))
     category = db.relationship('Category')
 
     def __init__(self, **kwargs):
