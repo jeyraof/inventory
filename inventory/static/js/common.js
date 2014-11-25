@@ -23,6 +23,8 @@ var App = React.createClass({
     };
   },
   render: function() {
+    var LoginStatus = this.state.loggedIn ? Auth.LogOut : Auth.LogIn;
+
     return (
       <div className="app">
         <div className="header">
@@ -32,9 +34,7 @@ var App = React.createClass({
             <li>3</li>
           </ul>
 
-          <ul className="right">
-
-          </ul>
+          <LoginStatus />
         </div>
 
         <div className="content">
