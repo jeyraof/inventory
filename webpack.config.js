@@ -12,6 +12,7 @@ module.exports = {
   },
   module: {
     loaders: [
+      { test: /\.js[x]?$/, loader: 'jsx?harmony' },
       { test: /\.css$/, loader: "style!css" },
       { test: /\.less$/, loader: "style!css!autoprefixer!less" }
     ]
