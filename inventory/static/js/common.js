@@ -1,7 +1,7 @@
 /**
  * Created by Jaeyoung on 11/23/14.
  */
-var React = require('react');
+var React = require('react/addons');
 
 var Router = require('react-router');
 var Route = Router.Route;
@@ -10,6 +10,7 @@ var DefaultRoute = Router.DefaultRoute;
 var Link = Router.Link;
 var RouteHandler = Router.RouteHandler;
 var Redirect = Router.Redirect;
+var Navigation = Router.Navigation;
 
 var Auth = require('./Auth');
 
@@ -18,7 +19,7 @@ require('../less/common.less');
 PreloadData = {};
 
 var App = React.createClass({
-  mixins: [Router.State],
+  mixins: [Router.State, Navigation],
   getInitialState: function() {
     return Auth.loggedIn();
   },

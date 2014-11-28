@@ -1,24 +1,27 @@
 var React = require('react/addons');
 var Router = require('react-router');
+var Navigation = Router.Navigation;
 
 var NewItemView = React.createClass({
-  mixins: [Router.State],
+  mixins: [Navigation],
   submitHandler: function(e) {
     e.preventDefault();
     var form = e.target;
+    var itemId = null;
     $.ajax({
       url: form.action,
       type: form.method,
       data: $(form).serialize(),
       success: function(data) {
-        if (data.ok) {
-          alert('생성 완료라고!');
-        } else {
+        if (!data.ok) {
           alert(data.msg);
+        } else {
+          itemId = data.item_id;
         }
       },
       async: false
     });
+    this.transitionTo('itemDetail', {itemId: itemId});
   },
   render: function () {
     var new_item_link = '/item/new';
@@ -88,7 +91,11 @@ var SelectBrand = React.createClass({
 
 var ItemDetailView = React.createClass({
   render: function() {
-    return 'kkk';
+    return (
+      <div>
+        아이템 디테일!
+      </div>
+    );
   }
 });
 
