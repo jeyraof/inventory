@@ -1,3 +1,15 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,900,300,700,500);
+
+a {
+  text-decoration: none;
+  color: #000000;
+}
+
+.Roboto(@weight: 400) {
+  font-family: 'Roboto', sans-serif;
+  font-weight: @weight;
+}
+
 .app {
   width: 1000px;
   margin: 0 auto;
@@ -12,12 +24,29 @@
 
       li {
         display: inline-block;
+        padding: 10px;
+
+        &:first-child {
+          padding-left: 0;
+        }
+
+        &:last-child {
+          padding-right: 0;
+        }
+
+        .logo {
+          .Roboto(900);
+          letter-spacing: 1px;
+          font-size: 20px;
+          line-height: 24px;
+          margin-right: 10px;
+        }
       }
 
       &.right {
         position: absolute;
-        right: 0;
         top: 0;
+        right: 0;
       }
     }
   }

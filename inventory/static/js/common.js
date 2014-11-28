@@ -15,8 +15,10 @@ var Auth = require('./Auth');
 
 require('../less/common.less');
 
+PreloadData = {};
 
 var App = React.createClass({
+  mixins: [Router.State],
   getInitialState: function() {
     return Auth.loggedIn();
   },
@@ -28,10 +30,8 @@ var App = React.createClass({
         <div className="header">
           <ul>
             <li>
-              <Link to="newsfeed">Inventory</Link>
+              <Link to="newsfeed" className="logo">Inventory</Link>
             </li>
-            <li>2</li>
-            <li>3</li>
           </ul>
 
           <LoginStatus />
@@ -62,6 +62,9 @@ var routes = (
     <NotFoundRoute handler={RedirectToMainWhenNotFound}/>
 
     <Route name="userDetail" path="user/:userId" handler={require('./UserDetail')}/>
+
+    <Route name="newItem" path="item/new" handler={require('./Item').newItem}/>
+
   </Route>
 );
 
