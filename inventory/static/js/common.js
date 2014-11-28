@@ -64,6 +64,7 @@ var routes = (
     <Route name="userDetail" path="user/:userId" handler={require('./UserDetail')}/>
 
     <Route name="newItem" path="item/new" handler={require('./Item').newItem}/>
+    <Route name="itemDetail" path="item/:itemId" handler={require('./Item').itemDetail}/>
 
   </Route>
 );

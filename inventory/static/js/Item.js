@@ -1,4 +1,4 @@
-var React = require('react');
+var React = require('react/addons');
 var Router = require('react-router');
 
 var NewItemView = React.createClass({
@@ -11,10 +11,10 @@ var NewItemView = React.createClass({
       type: form.method,
       data: $(form).serialize(),
       success: function(data) {
-        if (!data.ok) {
-          alert(data.msg);
+        if (data.ok) {
+          alert('생성 완료라고!');
         } else {
-          alert(data.item_id);
+          alert(data.msg);
         }
       },
       async: false
@@ -25,9 +25,8 @@ var NewItemView = React.createClass({
     return (
       <div>
         <form method="POST" action={new_item_link} onSubmit={this.submitHandler}>
-          <input type="text" name="category_id"/>
+          <SelectCategory />
           <SelectBrand />
-          <input type="text" name="brand_id"/>
           <input type="text" name="name"/>
           <textarea name="description"></textarea>
           <input type="submit" value="생성"/>
@@ -37,9 +36,34 @@ var NewItemView = React.createClass({
   }
 });
 
+var SelectCategory = React.createClass({
+  getCategoryList: function() {
+    var categoryList = [];
+    $.ajax({
+      url: '/item/get_categories',
+      type: 'GET',
+      success: function(data) {
+        categoryList = data.categories;
+      },
+      async: false
+    });
+    return categoryList;
+  },
+  render: function() {
+    var categoryList = this.getCategoryList();
+    return (
+      <select name="category_id">
+        {categoryList.map(function(category) {
+          return <option key={category.id} value={category.id}>{category.name}</option>;
+        })}
+      </select>
+    )
+  }
+});
+
 var SelectBrand = React.createClass({
   getBrandList: function() {
-    var brandList = null;
+    var brandList = [];
     $.ajax({
       url: '/item/get_brands',
       type: 'GET',
@@ -62,4 +86,11 @@ var SelectBrand = React.createClass({
   }
 });
 
+var ItemDetailView = React.createClass({
+  render: function() {
+    return 'kkk';
+  }
+});
+
 module.exports.newItem = NewItemView;
+module.exports.itemDetail = ItemDetailView;
