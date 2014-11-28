@@ -23,6 +23,8 @@ var Auth = {
       async: false
     });
 
+    PreloadData.loggedIn = true;
+
     return {
       loggedIn: util.getToken(tokenName) !== "",
       userName: util.getToken(userId)
