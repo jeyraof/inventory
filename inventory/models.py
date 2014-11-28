@@ -83,5 +83,24 @@ class Item(db.Model):
     def __init__(self, **kwargs):
         super(Item, self).__init__(**kwargs)
 
+    @classmethod
+    def create(cls, brand, category, name, description):
+        new_item = cls(brand=brand, category=category,
+                       name=name, description=description)
+        db.session.add(new_item)
+        db.session.commit()
+        db.session.refresh(new_item)
+        return new_item
 
+    @staticmethod
+    def validate_new(form):
+        if not form.get('category_id', None):
+            return 0, u'카테고리를 선택하셔야 진행할 수 있습니다.'
 
+        if not form.get('brand_id', None):
+            return 0, u'브랜드를 선택하셔야 진행할 수 있습니다.'
+
+        if not form.get('name', ''):
+            return 0, u'이름을 입력하셔야 진행할 수 있습니다.'
+
+        return 1, u'진행할 수 있다.'
